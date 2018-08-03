@@ -281,7 +281,7 @@ if __name__ == '__main__':
     sharpen_image = [[0, -1, 0], [-1, 5, -1], [0, -1, 0]]
     list_krenels2 = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
     # reduced_image = compare_kernels(np.array(normalization).T, edge_detection, sharpen_image, list_krenels2)
-    dupa123 = apply_conv(np.array(normalization).T, edge_detection, sharpen_image, list_krenels2)
+    new_image = apply_conv(np.array(normalization).T, edge_detection, sharpen_image, list_krenels2)
     # plt.subplot(2, 1, 1)
     # plt.imshow(reduced_image.T, cmap='gray')
     # plt.subplot(2, 1, 2)
