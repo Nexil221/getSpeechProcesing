@@ -289,3 +289,9 @@ if __name__ == '__main__':
     #
     # plt.title(full_name_file)
     # plt.show()
+
+
+# words = ['hello', 'who', 'which', 'where', 'I', 'you', 'he', 'she', 'it', 'we', 'they', 'one', 'two', 'three', 'four',
+#         'five', 'six', 'seven', 'eight', 'nine', 'ten', 'red', 'blue', 'green', 'white', 'black', 'orange', 'pink',
+#         'yellow', 'hours', 'duck', 'pig', 'cow', 'chicken', 'dog', 'cat', 'mouse', 'rat', 'bee', 'bat', 'lion','house'
+#         'block', 'flat', 'line', 'square', 'triangle', 'circle', 'cube']
