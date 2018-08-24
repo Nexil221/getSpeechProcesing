@@ -16,6 +16,13 @@ import pandas as pd
 import skimage.measure
 from scipy import misc
 from collections import Iterable
+from sklearn import datasets, linear_model
+from sklearn.model_selection import train_test_split
+from sklearn import tree
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+from sklearn import svm
 
 max_F0 = 200.
 
@@ -406,18 +413,52 @@ if __name__ == '__main__':
 
 
     # ######################### NOW
-    from sklearn.linear_model import LogisticRegression
+
     pix_list = creating_list_of_pixels()
     fixed_list = same_file_length(pix_list)
     df = abcde(fixed_list)
-    logReg = LogisticRegression()
+
     x_train = df.iloc[:, 0:33] ##or [:, :-1]
     y_train = df.iloc[:, 33:]
 
-    abc = logReg.fit(x_train, y_train)
-    plt.plot(abc)
-    plt.imshow(abc)
+    #Logistic Regression
+    log_reg = linear_model.LogisticRegression()
+    X_train, x_test, Y_train, y_test = train_test_split(x_train, y_train, test_size=0.2)
+    logic_reg_model = log_reg.fit(X_train, Y_train)
+    LogisticRegression_prediction = log_reg.predict(x_test)
+    LogisticRegression_score = log_reg.score(x_test, y_test)
+    print("Score of Logistic Regression : ", LogisticRegression_score)
 
+    #Decision Tree
+    D_tree = tree.DecisionTreeClassifier()
+    D_tree_ = D_tree.fit(X_train, Y_train)
+    y_pred = D_tree.predict(x_test)
+    print("Decision Tree : ")
+    # print(confusion_matrix(y_test, y_pred))
+    print(classification_report(y_test, y_pred))
+
+
+    #Random Forest
+    rf = RandomForestClassifier(n_estimators=100)
+    rf.fit(X_train, Y_train)
+    rf_pred = rf.predict(x_test)
+    print("Random forest :", metrics.accuracy_score(y_test, rf_pred))
+
+    #SVM
+    SVM_ = svm.SVC(kernel='linear')
+    SVM_.fit(X_train, Y_train)
+    svm_pred = SVM_.predict(x_test)
+    SVM_.score(x_test, y_test)
+    print("SMV score :", metrics.accuracy_score(y_test, y_pred))
+
+
+    # lm = linear_model.LinearRegression()
+    # model = lm.fit(X_train, Y_train)
+    # prediction = lm.predict(x_test)
+    # plt.scatter(y_test, prediction)
+    # plt.xlabel("True Values")
+    # plt.ylabel("Predictions")
+    # print("Score : ", model.score(x_test, y_test))
 
     # plt.subplot(2, 1, 1)
     # plt.imshow(reduced_image.T, cmap='gray')
